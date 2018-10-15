@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct
 class SampleApplication {
 
     @Autowired lateinit var databaseClient : DatabaseClient
-    val CREATE_SQL = "CREATE TABLE IF NOT EXISTS employee (id INTEGER PRIMARY KEY, name VARCHAR(100) NOT NULL, salary INTEGER NOT NULL);"
+    val CREATE_SQL = "CREATE TABLE IF NOT EXISTS employee (id serial PRIMARY KEY, name VARCHAR(100) NOT NULL, salary INTEGER NOT NULL);"
 
     @PostConstruct fun init () {
         println("init")
