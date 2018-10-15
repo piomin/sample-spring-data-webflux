@@ -21,6 +21,7 @@
         <kotlin.version>1.2.71</kotlin.version>
         <junit.version>4.12</junit.version>
         <java.version>1.8</java.version>
+        <reactor-bom.version>Californium-RELEASE</reactor-bom.version>
     </properties>
 
     <dependencies>
@@ -44,6 +45,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jdbc</artifactId>
+            <version>1.0.0.r2dbc-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>io.r2dbc</groupId>
