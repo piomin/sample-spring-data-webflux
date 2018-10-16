@@ -10,6 +10,7 @@ import org.springframework.data.r2dbc.function.DatabaseClient
 import org.springframework.data.r2dbc.repository.support.R2dbcRepositoryFactory
 import org.springframework.data.relational.core.mapping.RelationalMappingContext
 import org.springframework.data.relational.core.mapping.event.BeforeSaveEvent
+import org.springframework.web.reactive.function.client.WebClient
 import pl.piomin.service.model.Employee
 import pl.piomin.service.repository.EmployeeRepository
 import pl.piomin.service.repository.OrganizationRepository
@@ -53,6 +54,11 @@ class SampleConfiguration {
                 .build()
 
         return PostgresqlConnectionFactory(config)
+    }
+
+    @Bean
+    fun clientBuilder() : WebClient.Builder {
+        return WebClient.builder()
     }
 
 //    @Bean
