@@ -2,12 +2,10 @@ package pl.piomin.service.employee.controller
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import pl.piomin.service.dto.EmployeeDTO
-import pl.piomin.service.model.Employee
-import pl.piomin.service.repository.EmployeeRepository
+import pl.piomin.service.employee.model.Employee
+import pl.piomin.service.employee.repository.EmployeeRepository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import java.util.function.LongConsumer
 
 @RestController
 @RequestMapping("/employees")
