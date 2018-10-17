@@ -28,13 +28,11 @@ class OrganizationController {
 
     @GetMapping("/{id}/withEmployees")
     fun findByIdWithEmployees(@PathVariable id : Int) : Mono<OrganizationDTO> {
-        val employees = clientBuilder.build().get().uri("http://localhost:8090/employees/organization/$id")
+        val employees : Flux<Employee> = clientBuilder.build().get().uri("http://localhost:8090/employees/organization/$id")
                 .retrieve().bodyToFlux(Employee::class.java)
-        return employees.collectList()
-                .map { a -> OrganizationDTO(a) }
-                .mergeWith { repository.findById(id) }
-                .collectList()
-                .map { a -> EmployeeMapper().map(a) }
+        return repository.findById(id)
+                .zipWith(employees.collectList())
+                .map { tuple -> OrganizationDTO(tuple.t1.id as Int, tuple.t1.name, tuple.t2) }
     }
 
     @PostMapping
