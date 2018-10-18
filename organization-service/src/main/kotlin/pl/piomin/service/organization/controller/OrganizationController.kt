@@ -30,8 +30,8 @@ class OrganizationController {
     fun findByIdWithEmployees(@PathVariable id : Int) : Mono<OrganizationDTO> {
         val employees : Flux<Employee> = clientBuilder.build().get().uri("http://localhost:8090/employees/organization/$id")
                 .retrieve().bodyToFlux(Employee::class.java)
-        return repository.findById(id)
-                .zipWith(employees.collectList())
+        val org : Mono<Organization> = repository.findById(id)
+        return org.zipWith(employees.collectList()).log()
                 .map { tuple -> OrganizationDTO(tuple.t1.id as Int, tuple.t1.name, tuple.t2) }
     }
 
