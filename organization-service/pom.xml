@@ -42,17 +42,17 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jdbc</artifactId>
-            <version>1.0.0.r2dbc-SNAPSHOT</version>
+            <version>1.0.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>io.r2dbc</groupId>
             <artifactId>r2dbc-spi</artifactId>
-            <version>1.0.0.M5</version>
+            <version>1.0.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>io.r2dbc</groupId>
             <artifactId>r2dbc-postgresql</artifactId>
-            <version>1.0.0.M5</version>
+            <version>0.8.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -100,9 +100,9 @@
                     <args>
                         <arg>-Xjsr305=strict</arg>
                     </args>
-                    <compilerPlugins>
-                        <plugin>spring</plugin>
-                    </compilerPlugins>
+<!--                    <compilerPlugins>-->
+<!--                        <plugin>spring</plugin>-->
+<!--                    </compilerPlugins>-->
                 </configuration>
             </plugin>
         </plugins>
