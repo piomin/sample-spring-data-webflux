@@ -52,7 +52,7 @@
         <dependency>
             <groupId>io.r2dbc</groupId>
             <artifactId>r2dbc-postgresql</artifactId>
-            <version>0.8.0.RELEASE</version>
+            <version>0.8.13.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
