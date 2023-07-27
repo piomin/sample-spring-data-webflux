@@ -18,10 +18,10 @@ class EmployeeController {
     fun findAll() : Flux<Employee> = repository.findAll()
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id : Int) : Mono<Employee> = repository.findById(id)
+    fun findById(@PathVariable id: Int) : Mono<Employee> = repository.findById(id)
 
     @GetMapping("/organization/{organizationId}")
-    fun findByorganizationId(@PathVariable organizationId : Int) : Flux<Employee> = repository.findByOrganizationId(organizationId)
+    fun findByOrganizationId(@PathVariable organizationId: Int) : Flux<Employee> = repository.findByOrganizationId(organizationId)
 
     @PostMapping
     fun add(@RequestBody employee: Employee) : Mono<Employee> = repository.save(employee)
