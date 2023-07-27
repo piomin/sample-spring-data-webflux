@@ -1,2 +1,9 @@
-spring.application.name: organization-service
+spring:
+  application:
+    name: organization-service
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/spring
+    username: spring
+    password: spring123
+
 server.port: 8095
