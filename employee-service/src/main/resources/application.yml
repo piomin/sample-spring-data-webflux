@@ -7,3 +7,10 @@ spring:
     password: spring123
 
 server.port: 8090
+
+management:
+  endpoints.web.exposure.include: '*'
+  endpoint.health:
+    show-details: always
+    probes:
+      enabled: true

@@ -1,6 +1,6 @@
 package pl.piomin.service.organization;
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
@@ -13,7 +13,6 @@ import org.mockserver.model.HttpResponse.response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection
-import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.testcontainers.containers.PostgreSQLContainer
@@ -29,7 +28,6 @@ public class OrganizationControllerTests {
 
     @Autowired
     private lateinit var webTestClient: WebTestClient
-    private val serializer: ObjectMapper = ObjectMapper()
 
     companion object {
 
@@ -117,6 +115,6 @@ public class OrganizationControllerTests {
             Employee(1, "Test1", 10000, 1),
             Employee(2, "Test2", 20000, 1)
         )
-        return serializer.writeValueAsString(employees)
+        return jacksonObjectMapper().writeValueAsString(employees)
     }
 }

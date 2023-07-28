@@ -9,3 +9,10 @@ spring:
 server.port: 8095
 
 employee.client.url: http://localhost:8090
+
+management:
+  endpoints.web.exposure.include: '*'
+  endpoint.health:
+    show-details: always
+    probes:
+      enabled: true
