@@ -22,7 +22,7 @@ class OrganizationUnitTests {
     }
 
     fun getEmployees(organizationId: Int) : Flux<Employee> {
-        return Flux.fromIterable(mutableListOf(Employee("X", 1, 1), Employee("Y", 2, 2)))
+        return Flux.fromIterable(mutableListOf(Employee(1, "X", 1, 1), Employee(2, "Y", 2, 2)))
     }
 
     fun getOrganizationByName(name: String) : Mono<Organization> {

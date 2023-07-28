@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.reactive.function.client.WebClient
 import pl.piomin.service.organization.dto.OrganizationDTO
-import pl.piomin.service.organization.mapper.EmployeeMapper
 import pl.piomin.service.organization.model.Employee
 import pl.piomin.service.organization.model.Organization
 import pl.piomin.service.organization.repository.OrganizationRepository
@@ -18,7 +17,7 @@ class OrganizationController {
     @Autowired
     lateinit var repository : OrganizationRepository
     @Autowired
-    lateinit var clientBuilder : WebClient.Builder
+    lateinit var client : WebClient
 
     @GetMapping
     fun findAll() : Flux<Organization> = repository.findAll()
@@ -26,9 +25,9 @@ class OrganizationController {
     @GetMapping("/{id}")
     fun findById(@PathVariable id : Int) : Mono<Organization> = repository.findById(id)
 
-    @GetMapping("/{id}/withEmployees")
+    @GetMapping("/{id}/with-employees")
     fun findByIdWithEmployees(@PathVariable id : Int) : Mono<OrganizationDTO> {
-        val employees : Flux<Employee> = clientBuilder.build().get().uri("http://localhost:8090/employees/organization/$id")
+        val employees : Flux<Employee> = client.get().uri("/employees/organization/$id")
                 .retrieve().bodyToFlux(Employee::class.java)
         val org : Mono<Organization> = repository.findById(id)
         return org.zipWith(employees.collectList()).log()

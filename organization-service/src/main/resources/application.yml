@@ -7,3 +7,5 @@ spring:
     password: spring123
 
 server.port: 8095
+
+employee.client.url: http://localhost:8090
