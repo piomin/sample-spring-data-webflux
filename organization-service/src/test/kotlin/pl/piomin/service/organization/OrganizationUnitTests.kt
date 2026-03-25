@@ -1,6 +1,6 @@
 package pl.piomin.service.organization
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import pl.piomin.service.organization.dto.OrganizationDTO
 import pl.piomin.service.organization.model.Employee
 import pl.piomin.service.organization.model.Organization

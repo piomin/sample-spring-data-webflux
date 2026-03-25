@@ -6,7 +6,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection
+import org.springframework.context.ApplicationContext
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.testcontainers.containers.PostgreSQLContainer
@@ -15,12 +19,21 @@ import org.testcontainers.junit.jupiter.Testcontainers
 import pl.piomin.service.employee.model.Employee
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Import(EmployeeControllerTests.WebTestClientConfig::class)
 @Testcontainers
 @TestMethodOrder(OrderAnnotation::class)
 public class EmployeeControllerTests {
 
     @Autowired
     private lateinit var webTestClient: WebTestClient
+
+    @TestConfiguration
+    class WebTestClientConfig {
+        @Bean
+        fun webTestClient(context: ApplicationContext): WebTestClient {
+            return WebTestClient.bindToApplicationContext(context).build()
+        }
+    }
 
     companion object {
 
