@@ -12,7 +12,11 @@ import org.mockserver.model.HttpRequest.request
 import org.mockserver.model.HttpResponse.response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection
+import org.springframework.context.ApplicationContext
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.testcontainers.containers.PostgreSQLContainer
@@ -22,12 +26,21 @@ import pl.piomin.service.organization.model.Employee
 import pl.piomin.service.organization.model.Organization
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Import(OrganizationControllerTests.WebTestClientConfig::class)
 @Testcontainers
 @TestMethodOrder(OrderAnnotation::class)
 public class OrganizationControllerTests {
 
     @Autowired
     private lateinit var webTestClient: WebTestClient
+
+    @TestConfiguration
+    class WebTestClientConfig {
+        @Bean
+        fun webTestClient(context: ApplicationContext): WebTestClient {
+            return WebTestClient.bindToApplicationContext(context).build()
+        }
+    }
 
     companion object {
 

@@ -25,6 +25,11 @@ class OrganizationApplication {
     private lateinit var employeeUrl: String
 
     @Bean
+    fun webClientBuilder(): WebClient.Builder {
+        return WebClient.builder()
+    }
+
+    @Bean
     fun webClient(builder: WebClient.Builder): WebClient {
         return builder.baseUrl(employeeUrl).build()
     }
