@@ -88,8 +88,8 @@
         </dependency>
         <dependency>
             <groupId>org.mock-server</groupId>
-            <artifactId>mockserver-netty</artifactId>
-            <version>8.0.0</version>
+            <artifactId>mockserver-netty-no-dependencies</artifactId>
+            <version>9.2.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
