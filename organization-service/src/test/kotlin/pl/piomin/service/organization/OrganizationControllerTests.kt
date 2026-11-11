@@ -18,6 +18,8 @@ import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
@@ -52,18 +54,24 @@ public class OrganizationControllerTests {
             withPassword("spring123")
         }
 
-        private var mockServer: ClientAndServer? = null
+        private lateinit var mockServer: ClientAndServer
 
         @BeforeAll
         @JvmStatic
         internal fun beforeAll() {
-            mockServer = ClientAndServer.startClientAndServer(8090);
+            mockServer = ClientAndServer.startClientAndServer(0)
         }
 
         @AfterAll
         @JvmStatic
         internal fun afterAll() {
-            mockServer!!.stop()
+            mockServer.stop()
+        }
+
+        @DynamicPropertySource
+        @JvmStatic
+        internal fun employeeClientProperties(registry: DynamicPropertyRegistry) {
+            registry.add("employee.client.url") { "http://localhost:${mockServer.port}" }
         }
     }
 
@@ -107,7 +115,7 @@ public class OrganizationControllerTests {
     @Test
     @Order(3)
     fun shouldFindOrganizationWithEmployees() {
-        mockServer!!.`when`(request().withMethod("GET").withPath("/employees/organization/1"))
+        mockServer.`when`(request().withMethod("GET").withPath("/employees/organization/1"))
             .respond(response()
                 .withStatusCode(200)
                 .withContentType(org.mockserver.model.MediaType.APPLICATION_JSON)

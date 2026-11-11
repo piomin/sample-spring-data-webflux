@@ -86,6 +86,8 @@
             <artifactId>spring-boot-testcontainers</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- The no-dependencies artifact bundles its own Netty 4.1: plain mockserver-netty 9.x clashes
+             with Netty 4.2 from Spring Boot 4 (NoSuchMethodError on HttpServerCodec) -->
         <dependency>
             <groupId>org.mock-server</groupId>
             <artifactId>mockserver-netty-no-dependencies</artifactId>
